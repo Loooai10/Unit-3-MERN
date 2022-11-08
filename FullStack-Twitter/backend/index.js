@@ -1,20 +1,24 @@
 const express = require('express')
-
-//Initializing our application
+//import cors
+const cors = require('cors')
+// Initializing our application
 const app = express()
-//dotenv has to be first before the database file runs because it needs the env 
+
 require('dotenv').config()
 require('./config/database')
 
-
 // Mount our middleware
 //....
+//use cors
+app.use(cors())
 app.use(express.json())
+
 app.use(express.urlencoded({extended: false}))
+//....
 app.use('/', require('./routes/tweets'))
-//...
+app.use('/', require('./routes/users'))
 
-
+// Listening on a port
 app.listen(4000, () => {
     console.log('App listening on port 4000!')
 })

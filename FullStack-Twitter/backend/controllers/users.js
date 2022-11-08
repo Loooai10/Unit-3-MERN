@@ -31,35 +31,31 @@ async function createUserTweet(req,res) {
     res.json(user)
 }
 
+//update user function
 async function updateUser() {
-    try{
-    let updatedUser = await User.findByIdAndUpdate(
-        req.params._id,
-        req.body
-    )
-    res.json({message: 'User updated Successfully!'})
-   // res.json(updatedUser)
-    } catch(err) {
-        res.json(err)
+    try {
+        let updateUser = await User.findByIdAndUpdate(req.params._id, req.body)
+        res.status(200).json({message: 'User updated successfully'})
+    }
+    catch(err) {
+        res.status(400).json({message: 'User not updated'})
     }
 }
 
-async function deleteUser(req, res) {
-    try{
-        await User.findByIdAndDelete(
-            req.params._id,
-            res.json({message: 'User deleted successfully'})
-        )
-         } catch(err){
-            res.json(err)
-         }
-        }
-        
-
+//delete user function
+async function deleteUser(req,res) {
+    try {
+        let deleteUser = await User.findByIdAndDelete(req.params._id)
+        res.status(200).json({message: 'User deleted successfully'})
+    }
+    catch(err) {
+        res.status(400).json({message: 'User not deleted'})
+    }
+}
 
 module.exports = {
     createUser,
     createUserTweet,
-    deleteTweet,
-    updateTweet
+    updateUser,
+    deleteUser
 }
