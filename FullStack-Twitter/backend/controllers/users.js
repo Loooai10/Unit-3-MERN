@@ -29,7 +29,7 @@ const auth_sigin_post = async (req, res) =>{
     console.log(email);
 
     try{
-        let user = await User.findOne({email});
+        let user = await User.findOne({email}); //email: email
         console.log(user);
 
         if(!user){
@@ -48,7 +48,7 @@ const auth_sigin_post = async (req, res) =>{
         // JWT Token
         const payload = {
             user: {
-                id: user._id,
+                id: user._id, //_id means from the database 
                 name: user.name
             }
         }
